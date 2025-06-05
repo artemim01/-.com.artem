@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>Advertencia de susto</title>
+  <title>Хто ти — Женя чи Саня?</title>
   <style>
     body {
       font-family: sans-serif;
       text-align: center;
       padding-top: 100px;
       background-color: #fff;
+    }
+
+    button {
+      font-size: 1.5rem;
+      padding: 15px 30px;
+      margin: 20px;
+      cursor: pointer;
+      border-radius: 10px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
     }
 
     #screamer {
@@ -27,34 +43,35 @@
     #screamer img {
       width: 100%;
       max-width: 1000px;
-    }
-
-    button {
-      font-size: 1.5rem;
-      padding: 10px 20px;
-      cursor: pointer;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>¿Das tu consentimiento para una experiencia intensa?</h1>
-  <p>Al hacer clic, aceptas que se reproducirá un sonido fuerte y una imagen sorpresa.</p>
-  <button onclick="launchScreamer()">Sí, doy mi consentimiento</button>
+
+  <h1>Обери, хто ти є 👇</h1>
+
+  <button onclick="launchScreamer('Женя.png')">Женя</button>
+  <button onclick="launchScreamer('Саня.png')">Саня</button>
 
   <div id="screamer">
-    <img src="ttt.png" alt="Screamer">
+    <img id="screamerImage" src="" alt="Screamer">
   </div>
 
   <audio id="screamSound" src="https://www.myinstants.com/media/sounds/screamer.mp3"></audio>
 
   <script>
-    function launchScreamer() {
+    function launchScreamer(imageFile) {
       const audio = document.getElementById("screamSound");
       audio.volume = 1.0;
       audio.play();
 
+      const img = document.getElementById("screamerImage");
+      img.src = imageFile;
+
       document.getElementById("screamer").style.display = "flex";
     }
   </script>
+
 </body>
 </html>
