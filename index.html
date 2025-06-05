@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>Хто ти — Женя чи Саня?</title>
+  <title>Женя чи Саня</title>
   <style>
     body {
       font-family: sans-serif;
@@ -14,7 +14,7 @@
     button {
       font-size: 1.5rem;
       padding: 15px 30px;
-      margin: 20px;
+      margin: 10px;
       cursor: pointer;
       border-radius: 10px;
       border: none;
@@ -27,8 +27,11 @@
       background-color: #0056b3;
     }
 
-    #screamer {
+    #extraButtons, #screamer {
       display: none;
+    }
+
+    #screamer {
       position: fixed;
       top: 0;
       left: 0;
@@ -49,25 +52,48 @@
 </head>
 <body>
 
-  <h1>Обери, хто ти є 👇</h1>
+  <h1>Хто ти? 👇</h1>
+  <p>Обери персонажа, а потім дію.</p>
 
-  <button onclick="launchScreamer('Женя.png')">Женя</button>
-  <button onclick="launchScreamer('Саня.png')">Саня</button>
+  <!-- Кнопки вибору персонажа -->
+  <button onclick="selectPerson('Женя.png', 'Женя.mp3')">Женя</button>
+  <button onclick="selectPerson('Саня.png', 'Саня.mp3')">Саня</button>
 
+  <!-- Додаткові кнопки -->
+  <div id="extraButtons">
+    <h2>Що робити далі?</h2>
+    <button onclick="playScreamer('default')">Мій варіант 1</button>
+    <button onclick="playScreamer('alt')">Мій варіант 2</button>
+  </div>
+
+  <!-- Скример -->
   <div id="screamer">
     <img id="screamerImage" src="" alt="Screamer">
   </div>
 
-  <audio id="screamSound" src="https://www.myinstants.com/media/sounds/screamer.mp3"></audio>
+  <!-- Аудіо -->
+  <audio id="soundPlayer"></audio>
 
   <script>
-    function launchScreamer(imageFile) {
-      const audio = document.getElementById("screamSound");
-      audio.volume = 1.0;
-      audio.play();
+    let currentImage = '';
+    let altSoundPath = '';
+    const defaultSoundURL = "https://www.myinstants.com/media/sounds/screamer.mp3";
 
-      const img = document.getElementById("screamerImage");
-      img.src = imageFile;
+    function selectPerson(image, altSound) {
+      currentImage = image;
+      altSoundPath = altSound;
+      document.getElementById("extraButtons").style.display = "block";
+    }
+
+    function playScreamer(type) {
+      const soundPlayer = document.getElementById("soundPlayer");
+      const imageElement = document.getElementById("screamerImage");
+
+      imageElement.src = currentImage;
+      soundPlayer.src = (type === 'alt') ? altSoundPath : defaultSoundURL;
+
+      soundPlayer.volume = 1.0;
+      soundPlayer.play();
 
       document.getElementById("screamer").style.display = "flex";
     }
@@ -75,3 +101,4 @@
 
 </body>
 </html>
+
