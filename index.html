@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Advertencia de susto</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background-color: #fff;
+    }
+
+    #screamer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #screamer img {
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    button {
+      font-size: 1.5rem;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>¿Das tu consentimiento para una experiencia intensa?</h1>
+  <p>Al hacer clic, aceptas que se reproducirá un sonido fuerte y una imagen sorpresa.</p>
+  <button onclick="launchScreamer()">Sí, doy mi consentimiento</button>
+
+  <div id="screamer">
+    <img src="ttt.png" alt="Screamer">
+  </div>
+
+  <audio id="screamSound" src="https://www.myinstants.com/media/sounds/screamer.mp3"></audio>
+
+  <script>
+    function launchScreamer() {
+      const audio = document.getElementById("screamSound");
+      audio.volume = 1.0;
+      audio.play();
+
+      document.getElementById("screamer").style.display = "flex";
+    }
+  </script>
+</body>
+</html>
